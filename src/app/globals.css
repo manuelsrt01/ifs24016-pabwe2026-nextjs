@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+}
+
+@layer base {
+  button,
+  a,
+  [role="button"],
+  select,
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+}
