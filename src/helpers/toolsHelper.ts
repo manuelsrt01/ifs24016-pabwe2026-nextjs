@@ -69,10 +69,24 @@ export const formatDate = (value: string): string =>
     minute: "2-digit",
   });
 
+const isLocalHost = (url: URL) =>
+  url.hostname === "localhost" || url.hostname === "127.0.0.1";
+
 export const resolveAssetUrl = (
   path: string | null | undefined,
 ): string | null => {
   if (!path) return null;
-  if (/^https?:\/\//i.test(path)) return path;
+
+  if (/^https?:\/\//i.test(path)) {
+    try {
+      const url = new URL(path);
+      if (url.protocol === "http:" && !isLocalHost(url))
+        url.protocol = "https:";
+      return url.toString();
+    } catch {
+      return path;
+    }
+  }
+
   return `${new URL(DELCOM_BASEURL).origin}/${path.replace(/^\//, "")}`;
 };
