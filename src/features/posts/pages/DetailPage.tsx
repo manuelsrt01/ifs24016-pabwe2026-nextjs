@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
 import {
   IconArrowLeft,
@@ -35,8 +36,9 @@ import {
   asyncAddComment,
   asyncDeleteComment,
 } from "../states/action";
-import ChangeModal from "../modals/ChangeModal";
-import ChangeCoverModal from "../modals/ChangeCoverModal";
+
+const ChangeModal = dynamic(() => import("../modals/ChangeModal"));
+const ChangeCoverModal = dynamic(() => import("../modals/ChangeCoverModal"));
 
 export default function DetailPage() {
   const params = useParams<{ postId: string }>();

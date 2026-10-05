@@ -1,35 +1,52 @@
-import Swal from "sweetalert2";
 import { DELCOM_BASEURL } from "@/lib/config";
 
-export const showSuccessDialog = (message: string, title = "Berhasil") =>
-  Swal.fire({
+const loadSwal = async () => (await import("sweetalert2")).default;
+
+export const showSuccessDialog = async (
+  message: string,
+  title = "Berhasil",
+) => {
+  const Swal = await loadSwal();
+  return Swal.fire({
     icon: "success",
     title,
     text: message,
     confirmButtonColor: "#0f766e",
   });
+};
 
-export const showErrorDialog = (message: string, title = "Terjadi Kesalahan") =>
-  Swal.fire({
+export const showErrorDialog = async (
+  message: string,
+  title = "Terjadi Kesalahan",
+) => {
+  const Swal = await loadSwal();
+  return Swal.fire({
     icon: "error",
     title,
     text: message,
     confirmButtonColor: "#0f766e",
   });
+};
 
-export const showWarningDialog = (message: string, title = "Perhatian") =>
-  Swal.fire({
+export const showWarningDialog = async (
+  message: string,
+  title = "Perhatian",
+) => {
+  const Swal = await loadSwal();
+  return Swal.fire({
     icon: "warning",
     title,
     text: message,
     confirmButtonColor: "#0f766e",
   });
+};
 
 export const showConfirmDialog = async (
   message: string,
   title = "Apakah kamu yakin?",
   confirmText = "Ya, lanjutkan",
 ): Promise<boolean> => {
+  const Swal = await loadSwal();
   const result = await Swal.fire({
     icon: "question",
     title,

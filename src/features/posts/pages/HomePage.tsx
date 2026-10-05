@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import {
   IconPlus,
   IconSearch,
@@ -22,7 +23,8 @@ import {
   asyncGetPosts,
 } from "../states/action";
 import PostCard from "../components/PostCard";
-import AddModal from "../modals/AddModal";
+
+const AddModal = dynamic(() => import("../modals/AddModal"));
 
 export default function HomePage({
   initialTab = "all",
